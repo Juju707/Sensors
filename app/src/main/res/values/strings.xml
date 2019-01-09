@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Sensors</string>
+    <string name="start">Start</string>
+    <string name="zeroValue">0</string>
+    <string name="xAxis">X Axis</string>
+    <string name="yAxis">Y Axis</string>
+    <string name="zAxis">Z Axis</string>
+    <string name="title">Choose your sensor</string>
+    <string name="accelerometerBtn">Accelerometer</string>
+    <string name="gyroscopeBtn">Gyroscope</string>
+    <string name="fileName">File name</string>
+    <string name="clearData">Clear data</string>
+    <string name="plot">Plot</string>
+    <string name="savedDraw">Draw from saved data</string>
+    <string name="currentDraw">Draw from current data</string>
+    <string name="tryAgain">Try again</string>
+    <string name="save">Save data</string>
+    <string name="transformer">Fourier\'s Transformer</string>
+</resources>

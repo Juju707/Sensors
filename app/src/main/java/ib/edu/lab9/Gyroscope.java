@@ -38,6 +38,8 @@ public class Gyroscope extends Activity implements SensorEventListener {
     private XYMultipleSeriesRenderer multiple;
     private LinearLayout chartLayout;
 
+    private boolean wasRunning=false;
+
     private XYSeries X;
     private XYSeries Y;
     private XYSeries Z;
@@ -64,6 +66,16 @@ public class Gyroscope extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gyroscope);
 
+        if(savedInstanceState!=null){
+            count=savedInstanceState.getInt("count");
+            X= (XYSeries) savedInstanceState.getSerializable("X");
+            Y= (XYSeries) savedInstanceState.getSerializable("Y");
+            Z= (XYSeries) savedInstanceState.getSerializable("Z");
+            values= (ArrayList<Double>) savedInstanceState.getSerializable("values");
+            wasRunning=savedInstanceState.getBoolean("wasRunning");
+            isRunning=savedInstanceState.getBoolean("isRunning");
+        }
+
         //initializing data series
         X=new XYSeries("X");
         Y=new XYSeries("Y");
@@ -79,6 +91,28 @@ public class Gyroscope extends Activity implements SensorEventListener {
         wakeLock=powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"myapp:test");
         plot = new Intent(getBaseContext(), FFT.class);
         time=new ArrayList<>();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState){
+        savedInstanceState.putInt("count",count);
+        savedInstanceState.putSerializable("X",X);
+        savedInstanceState.putSerializable("Y",Y);
+        savedInstanceState.putSerializable("Z",Z);
+        savedInstanceState.putSerializable("values",values);
+        savedInstanceState.putBoolean("wasRunning",wasRunning);
+        savedInstanceState.putBoolean("isRunning",isRunning);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        wasRunning=isRunning;
+        isRunning=false;
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(wasRunning)isRunning=true;
     }
 
     //Method for registering the changes

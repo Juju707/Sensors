@@ -25,6 +25,7 @@ public class Accelerometer extends Activity implements SensorEventListener {
 
     private SensorManager manager;
     private boolean isRunning=false;
+    private boolean wasRunning=false;
     private EditText fileName;
     private EditText editTextAx;
     private EditText editTextAy;
@@ -50,6 +51,17 @@ public class Accelerometer extends Activity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accelerometer);
+
+        if(savedInstanceState!=null){
+            counter=savedInstanceState.getInt("count");
+            X= (XYSeries) savedInstanceState.getSerializable("X");
+            Y= (XYSeries) savedInstanceState.getSerializable("Y");
+            Z= (XYSeries) savedInstanceState.getSerializable("Z");
+            values= (ArrayList<Double>) savedInstanceState.getSerializable("values");
+            wasRunning=savedInstanceState.getBoolean("wasRunning");
+            isRunning=savedInstanceState.getBoolean("isRunning");
+        }
+
         //initializing data series
         X=new XYSeries("X");
         Y=new XYSeries("Y");
@@ -167,4 +179,29 @@ public class Accelerometer extends Activity implements SensorEventListener {
         editTextAz.setText("");
         fileName.setText("");
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState){
+        savedInstanceState.putInt("count",counter);
+        savedInstanceState.putSerializable("X",X);
+        savedInstanceState.putSerializable("Y",Y);
+        savedInstanceState.putSerializable("Z",Z);
+        savedInstanceState.putSerializable("values",values);
+        savedInstanceState.putBoolean("wasRunning",wasRunning);
+        savedInstanceState.putBoolean("isRunning",isRunning);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        wasRunning=isRunning;
+        isRunning=false;
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(wasRunning)isRunning=true;
+    }
+
+
 }

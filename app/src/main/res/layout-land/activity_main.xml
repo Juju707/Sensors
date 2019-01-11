@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenu">
+
+    <TextView
+        android:id="@+id/textViewLabel1"
+        android:layout_width="270dp"
+        android:layout_height="69dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/almendra_sc"
+        android:text="@string/title"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnAccelerometer"
+        android:layout_width="148dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="accelerometerChosen"
+        android:text="@string/accelerometerBtn"
+        app:layout_constraintBottom_toTopOf="@+id/btnGyroscope"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLabel1" />
+
+    <Button
+        android:id="@+id/btnGyroscope"
+        android:layout_width="141dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="122dp"
+        android:layout_marginBottom="3dp"
+        android:onClick="gyroscopeChosen"
+        android:text="@string/gyroscopeBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAccelerometer" />
+</android.support.constraint.ConstraintLayout>
